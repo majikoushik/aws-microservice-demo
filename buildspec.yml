@@ -1,0 +1,23 @@
+version: 0.2
+phases:
+  install:
+    runtime-versions:
+      java: corretto21
+  pre_build:
+    commands:
+      - echo Running full Maven test suite before building images...
+      - mvn -B -ntp clean verify
+      - aws ecr get-login-password --region "$AWS_DEFAULT_REGION" | docker login --username AWS --password-stdin "$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com"
+      - export IMAGE_TAG="${CODEBUILD_RESOLVED_SOURCE_VERSION:-latest}"
+  build:
+    commands:
+      - docker build -f employee-service/Dockerfile -t "$EMPLOYEE_ECR_REPO:$IMAGE_TAG" .
+      - docker build -f leave-service/Dockerfile -t "$LEAVE_ECR_REPO:$IMAGE_TAG" .
+      - docker push "$EMPLOYEE_ECR_REPO:$IMAGE_TAG"
+      - docker push "$LEAVE_ECR_REPO:$IMAGE_TAG"
+      - printf '[{"name":"employee","imageUri":"%s"}]' "$EMPLOYEE_ECR_REPO:$IMAGE_TAG" > employee-imagedefinitions.json
+      - printf '[{"name":"leave","imageUri":"%s"}]' "$LEAVE_ECR_REPO:$IMAGE_TAG" > leave-imagedefinitions.json
+artifacts:
+  files:
+    - employee-imagedefinitions.json
+    - leave-imagedefinitions.json

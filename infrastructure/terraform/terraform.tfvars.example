@@ -1,0 +1,10 @@
+aws_region          = "ap-south-1"
+project_name        = "workforce-demo"
+budget_email        = "your-real-email@example.com"
+monthly_budget_usd  = "20"
+image_tag           = "v1"
+# Optional CodePipeline integration after the application works:
+enable_pipeline     = false
+github_owner        = "YOUR_GITHUB_USERNAME"
+github_repo         = "workforce-management-system"
+github_branch       = "main"

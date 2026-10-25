@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:employees;MODE=MySQL;DB_CLOSE_DELAY=-1;DATABASE_TO_LOWER=TRUE
+    username: sa
+    password: ""
+    driver-class-name: org.h2.Driver
+  h2:
+    console:
+      enabled: false # Avoid exposing a development-only SQL console.
+app:
+  storage:
+    local-dir: ${LOCAL_UPLOAD_DIR:local-uploads}
+logging:
+  level:
+    org.springframework.security: DEBUG

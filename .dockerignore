@@ -1,0 +1,13 @@
+**/target
+.git
+.gitignore
+**/.terraform
+**/*.tfstate*
+**/terraform.tfvars
+**/.env
+local-uploads
+**/__pycache__
+**/.idea
+**/.vscode
+postman
+docs

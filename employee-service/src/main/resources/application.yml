@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: employee-service
+  profiles:
+    default: local
+  jpa:
+    properties:
+      hibernate:
+        type:
+          preferred_instant_jdbc_type: TIMESTAMP
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+  flyway:
+    enabled: true
+    table: employee_flyway_history
+server:
+  port: ${SERVER_PORT:8081}
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      probes:
+        enabled: true
+logging:
+  pattern:
+    level: "%5p [requestId:%X{requestId:-none}]"
+spring.servlet.multipart.max-file-size: 5MB
+spring.servlet.multipart.max-request-size: 6MB

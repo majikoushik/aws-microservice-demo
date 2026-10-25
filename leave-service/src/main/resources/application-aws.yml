@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    url: jdbc:mysql://${DB_HOST}:${DB_PORT:3306}/${DB_NAME:workforce}?useSSL=true&requireSSL=true
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${COGNITO_ISSUER}
+app:
+  security:
+    cognito-client-id: ${COGNITO_CLIENT_ID}
+  employee-service-url: ${EMPLOYEE_SERVICE_URL}
+  notifications:
+    queue-url: ${SQS_QUEUE_URL}

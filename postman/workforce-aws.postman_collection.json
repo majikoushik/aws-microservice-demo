@@ -1,0 +1,139 @@
+{
+  "info": {
+    "name": "Workforce Microservices - AWS Cognito JWT",
+    "description": "Create Cognito user/group and employee records first. Insert actual access tokens manually as variables and never commit a token!",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "apiBase",
+      "value": "https://YOUR_API_ID.execute-api.ap-south-1.amazonaws.com"
+    },
+    {
+      "key": "hrToken",
+      "value": "SET_VALID_COGNITO_HR_ACCESS_TOKEN"
+    },
+    {
+      "key": "aliceToken",
+      "value": "SET_VALID_COGNITO_ALICE_ACCESS_TOKEN"
+    },
+    {
+      "key": "managerToken",
+      "value": "SET_VALID_COGNITO_MANAGER_ACCESS_TOKEN"
+    },
+    {
+      "key": "aliceId",
+      "value": "1"
+    },
+    {
+      "key": "leaveId",
+      "value": "1"
+    }
+  ],
+  "item": [
+    {
+      "name": "HR create synthetic employee",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{hrToken}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{apiBase}}/api/employees",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"identitySubject\": \"REPLACE_WITH_ALICE_COGNITO_SUB\",\n  \"name\": \"Alice AWS Demo\",\n  \"email\": \"alice@example.test\",\n  \"department\": \"Engineering\",\n  \"managerSubject\": \"REPLACE_WITH_MANAGER_COGNITO_SUB\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "Alice own profile",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{aliceToken}}"
+          }
+        ],
+        "url": "{{apiBase}}/api/employees/{{aliceId}}"
+      }
+    },
+    {
+      "name": "Alice leave request",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{aliceToken}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{apiBase}}/api/leaves",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"employeeId\": 1,\n  \"startDate\": \"2027-01-10\",\n  \"endDate\": \"2027-01-12\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "Manager approve leave",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{managerToken}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{apiBase}}/api/leaves/{{leaveId}}/approve",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"comment\": \"Approved\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "Alice reads leave balance",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{aliceToken}}"
+          }
+        ],
+        "url": "{{apiBase}}/api/leaves/employee/{{aliceId}}/balance"
+      }
+    }
+  ]
+}

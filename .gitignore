@@ -1,0 +1,207 @@
+
+# ==========================================================
+# Workforce Management System
+# Java | Spring Boot | Maven | Microservices | AWS
+# ==========================================================
+
+# ----------------------------------------------------------
+# 1. Maven Build Files
+# ----------------------------------------------------------
+target/
+**/target/
+*.class
+*.jar
+*.war
+*.ear
+
+# Keep Maven Wrapper JAR if added later
+!**/.mvn/wrapper/maven-wrapper.jar
+
+# Maven logs
+dependency-reduced-pom.xml
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+release.properties
+
+# ----------------------------------------------------------
+# 2. IntelliJ IDEA
+# ----------------------------------------------------------
+.idea/
+*.iml
+*.ipr
+*.iws
+out/
+
+# ----------------------------------------------------------
+# 3. Eclipse / STS
+# ----------------------------------------------------------
+.project
+.classpath
+.settings/
+.springBeans
+.sts4-cache/
+
+# ----------------------------------------------------------
+# 4. Visual Studio Code
+# ----------------------------------------------------------
+.vscode/
+.history/
+
+# ----------------------------------------------------------
+# 5. Operating System Files
+# ----------------------------------------------------------
+.DS_Store
+Thumbs.db
+desktop.ini
+*~
+
+# ----------------------------------------------------------
+# 6. Application Logs
+# ----------------------------------------------------------
+*.log
+logs/
+**/logs/
+log/
+**/log/
+
+# ----------------------------------------------------------
+# 7. Local H2 Database Files
+# ----------------------------------------------------------
+*.mv.db
+*.trace.db
+*.h2.db
+*.lock.db
+h2-data/
+data/h2/
+
+# ----------------------------------------------------------
+# 8. Environment Variables and Secrets
+# ----------------------------------------------------------
+.env
+.env.*
+!.env.example
+!.env.template
+
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+*.keystore
+
+secrets/
+credentials/
+aws-credentials.json
+
+# AWS CLI credentials (if stored in project)
+.aws/
+
+# ----------------------------------------------------------
+# 9. Local Employee Documents / Uploads
+# ----------------------------------------------------------
+uploads/
+**/uploads/
+local-documents/
+storage/
+**/storage/
+
+# ----------------------------------------------------------
+# 10. Terraform
+# ----------------------------------------------------------
+.terraform/
+**/.terraform/
+
+*.tfstate
+*.tfstate.*
+*.tfplan
+
+*.tfvars
+*.tfvars.json
+
+crash.log
+crash.*.log
+
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Keep Terraform dependency lockfile in Git
+!.terraform.lock.hcl
+
+# ----------------------------------------------------------
+# 11. AWS SAM / CDK (Future Extensions)
+# ----------------------------------------------------------
+.aws-sam/
+cdk.out/
+
+# ----------------------------------------------------------
+# 12. Test Reports and Coverage
+# ----------------------------------------------------------
+coverage/
+coverage.xml
+jacoco.exec
+jacoco/
+test-results/
+
+# ----------------------------------------------------------
+# 13. Temporary Files
+# ----------------------------------------------------------
+*.tmp
+*.temp
+*.bak
+*.swp
+*.swo
+
+temp/
+tmp/
+.cache/
+
+# ----------------------------------------------------------
+# 14. Python Lambda Temporary Files
+# ----------------------------------------------------------
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+
+# ----------------------------------------------------------
+# 15. Node.js (Future Frontend)
+# ----------------------------------------------------------
+node_modules/
+dist/
+.next/
+npm-debug.log*
+yarn-error.log*
+
+# ----------------------------------------------------------
+# 16. Docker
+# ----------------------------------------------------------
+docker-compose.override.yml
+
+# ----------------------------------------------------------
+# 17. IDE / Build Cache
+# ----------------------------------------------------------
+.gradle/
+build/
+
+# ==========================================================
+# IMPORTANT:
+# Do NOT ignore:
+#
+# pom.xml
+# Dockerfile
+# buildspec.yml
+# application.yml
+# application-local.yml
+# application-aws.yml
+# Terraform .tf files
+# README.md
+# docs/
+# .github/workflows/
+#
+# These files should be committed to GitHub.
+# Never store passwords or access keys in tracked files.
+# ==========================================================

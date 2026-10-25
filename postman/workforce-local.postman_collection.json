@@ -1,0 +1,512 @@
+{
+  "info": {
+    "name": "Workforce Microservices - LOCAL H2 learning collection",
+    "description": "Requires both Spring Boot services on local ports 8081,8082. Demo headers ARE NOT secure and only work for local profile. See docs/01-LOCAL-QUICKSTART.md.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "employeeBase",
+      "value": "http://localhost:8081"
+    },
+    {
+      "key": "leaveBase",
+      "value": "http://localhost:8082"
+    },
+    {
+      "key": "employeeId",
+      "value": "1"
+    },
+    {
+      "key": "leaveId",
+      "value": "1"
+    },
+    {
+      "key": "docId",
+      "value": "1"
+    }
+  ],
+  "item": [
+    {
+      "name": "Employee management",
+      "item": [
+        {
+          "name": "Alice reads own record",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-Demo-Role",
+                "value": "EMPLOYEE"
+              },
+              {
+                "key": "X-Demo-Subject",
+                "value": "employee-alice"
+              },
+              {
+                "key": "X-Request-ID",
+                "value": "postman-workforce-demo"
+              }
+            ],
+            "url": "{{employeeBase}}/api/employees/1"
+          }
+        },
+        {
+          "name": "Alice forbidden to read Bob",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-Demo-Role",
+                "value": "EMPLOYEE"
+              },
+              {
+                "key": "X-Demo-Subject",
+                "value": "employee-alice"
+              },
+              {
+                "key": "X-Request-ID",
+                "value": "postman-workforce-demo"
+              }
+            ],
+            "url": "{{employeeBase}}/api/employees/2"
+          }
+        },
+        {
+          "name": "Manager lists team",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-Demo-Role",
+                "value": "MANAGER"
+              },
+              {
+                "key": "X-Demo-Subject",
+                "value": "manager-maria"
+              },
+              {
+                "key": "X-Request-ID",
+                "value": "postman-workforce-demo"
+              }
+            ],
+            "url": "{{employeeBase}}/api/employees?page=0&size=10"
+          }
+        },
+        {
+          "name": "HR lists employees",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-Demo-Role",
+                "value": "HR"
+              },
+              {
+                "key": "X-Demo-Subject",
+                "value": "hr-helen"
+              },
+              {
+                "key": "X-Request-ID",
+                "value": "postman-workforce-demo"
+              }
+            ],
+            "url": "{{employeeBase}}/api/employees?page=0&size=10"
+          }
+        },
+        {
+          "name": "HR creates employee",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-Demo-Role",
+                "value": "HR"
+              },
+              {
+                "key": "X-Demo-Subject",
+                "value": "hr-helen"
+              },
+              {
+                "key": "X-Request-ID",
+                "value": "postman-workforce-demo"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{employeeBase}}/api/employees",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"identitySubject\": \"employee-charlie\",\n  \"name\": \"Charlie Learning\",\n  \"email\": \"charlie@example.test\",\n  \"department\": \"Engineering\",\n  \"managerSubject\": \"manager-maria\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "HR updates employee 2",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "X-Demo-Role",
+                "value": "HR"
+              },
+              {
+                "key": "X-Demo-Subject",
+                "value": "hr-helen"
+              },
+              {
+                "key": "X-Request-ID",
+                "value": "postman-workforce-demo"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{employeeBase}}/api/employees/2",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"identitySubject\": \"employee-bob\",\n  \"name\": \"Bob Kumar\",\n  \"email\": \"bob@example.test\",\n  \"department\": \"Operations\",\n  \"managerSubject\": \"manager-maria\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Attendance and Leave",
+      "item": [
+        {
+          "name": "Read leave balance",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-Demo-Role",
+                "value": "EMPLOYEE"
+              },
+              {
+                "key": "X-Demo-Subject",
+                "value": "employee-alice"
+              },
+              {
+                "key": "X-Request-ID",
+                "value": "postman-workforce-demo"
+              }
+            ],
+            "url": "{{leaveBase}}/api/leaves/employee/{{employeeId}}/balance"
+          }
+        },
+        {
+          "name": "Create a future leave request",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-Demo-Role",
+                "value": "EMPLOYEE"
+              },
+              {
+                "key": "X-Demo-Subject",
+                "value": "employee-alice"
+              },
+              {
+                "key": "X-Request-ID",
+                "value": "postman-workforce-demo"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{leaveBase}}/api/leaves",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"employeeId\": 1,\n  \"startDate\": \"2027-01-10\",\n  \"endDate\": \"2027-01-12\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Manager approves leave ID",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-Demo-Role",
+                "value": "MANAGER"
+              },
+              {
+                "key": "X-Demo-Subject",
+                "value": "manager-maria"
+              },
+              {
+                "key": "X-Request-ID",
+                "value": "postman-workforce-demo"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{leaveBase}}/api/leaves/{{leaveId}}/approve",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"comment\": \"Approved for planned break\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Manager rejects leave ID",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-Demo-Role",
+                "value": "MANAGER"
+              },
+              {
+                "key": "X-Demo-Subject",
+                "value": "manager-maria"
+              },
+              {
+                "key": "X-Request-ID",
+                "value": "postman-workforce-demo"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{leaveBase}}/api/leaves/{{leaveId}}/reject",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"comment\": \"Project deadline\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "List leaves",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-Demo-Role",
+                "value": "EMPLOYEE"
+              },
+              {
+                "key": "X-Demo-Subject",
+                "value": "employee-alice"
+              },
+              {
+                "key": "X-Request-ID",
+                "value": "postman-workforce-demo"
+              }
+            ],
+            "url": "{{leaveBase}}/api/leaves/employee/{{employeeId}}"
+          }
+        },
+        {
+          "name": "Read approval audit",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-Demo-Role",
+                "value": "EMPLOYEE"
+              },
+              {
+                "key": "X-Demo-Subject",
+                "value": "employee-alice"
+              },
+              {
+                "key": "X-Request-ID",
+                "value": "postman-workforce-demo"
+              }
+            ],
+            "url": "{{leaveBase}}/api/leaves/{{leaveId}}/audit"
+          }
+        },
+        {
+          "name": "Record attendance",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-Demo-Role",
+                "value": "EMPLOYEE"
+              },
+              {
+                "key": "X-Demo-Subject",
+                "value": "employee-alice"
+              },
+              {
+                "key": "X-Request-ID",
+                "value": "postman-workforce-demo"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{leaveBase}}/api/attendance",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"employeeId\": 1,\n  \"date\": \"2026-10-24\",\n  \"status\": \"PRESENT\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "List attendance",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-Demo-Role",
+                "value": "EMPLOYEE"
+              },
+              {
+                "key": "X-Demo-Subject",
+                "value": "employee-alice"
+              },
+              {
+                "key": "X-Request-ID",
+                "value": "postman-workforce-demo"
+              }
+            ],
+            "url": "{{leaveBase}}/api/attendance/employee/{{employeeId}}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Documents",
+      "item": [
+        {
+          "name": "Upload PDF - choose a local file in Postman",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-Demo-Role",
+                "value": "EMPLOYEE"
+              },
+              {
+                "key": "X-Demo-Subject",
+                "value": "employee-alice"
+              },
+              {
+                "key": "X-Request-ID",
+                "value": "postman-workforce-demo"
+              }
+            ],
+            "url": "{{employeeBase}}/api/employees/{{employeeId}}/documents",
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "src": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "List documents",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-Demo-Role",
+                "value": "EMPLOYEE"
+              },
+              {
+                "key": "X-Demo-Subject",
+                "value": "employee-alice"
+              },
+              {
+                "key": "X-Request-ID",
+                "value": "postman-workforce-demo"
+              }
+            ],
+            "url": "{{employeeBase}}/api/employees/{{employeeId}}/documents"
+          }
+        },
+        {
+          "name": "Get protected download path",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-Demo-Role",
+                "value": "EMPLOYEE"
+              },
+              {
+                "key": "X-Demo-Subject",
+                "value": "employee-alice"
+              },
+              {
+                "key": "X-Request-ID",
+                "value": "postman-workforce-demo"
+              }
+            ],
+            "url": "{{employeeBase}}/api/employees/{{employeeId}}/documents/{{docId}}/download"
+          }
+        },
+        {
+          "name": "Download file bytes locally",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-Demo-Role",
+                "value": "EMPLOYEE"
+              },
+              {
+                "key": "X-Demo-Subject",
+                "value": "employee-alice"
+              },
+              {
+                "key": "X-Request-ID",
+                "value": "postman-workforce-demo"
+              }
+            ],
+            "url": "{{employeeBase}}/api/employees/{{employeeId}}/documents/{{docId}}/content"
+          }
+        }
+      ]
+    }
+  ]
+}
