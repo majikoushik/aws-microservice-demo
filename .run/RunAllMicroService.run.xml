@@ -1,0 +1,7 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="RunAllMicroService" type="CompoundRunConfigurationType">
+    <toRun name="employee-service run" type="MavenRunConfiguration" />
+    <toRun name="leave-service run" type="MavenRunConfiguration" />
+    <method v="2" />
+  </configuration>
+</component>
