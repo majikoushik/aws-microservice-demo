@@ -1,0 +1,11 @@
+environment        = "staging"
+region             = "us-east-2"
+vpc_cidr           = "10.30.0.0/16"
+db_instance_class  = "db.t4g.micro"
+db_multi_az        = false
+# Supply TF_VAR_db_password securely rather than writing it here.
+enable_services    = false  # First deploy; change to true after images exist.
+employee_image_tag = "latest"
+leave_image_tag    = "latest"
+# github_repo_url = "https://github.com/OWNER/REPO"
+# codebuild_connection_arn = "arn:aws:codeconnections:us-east-2:ACCOUNT:connection/UUID"

@@ -4,6 +4,27 @@
 
 > **Status:** Reference implementation for study and portfolio development, not a certified production HR platform. The AWS infrastructure requires your own account, credentials, actual image builds, and verification. Do not store real employee data in this sample. **Local execution requires no Docker, AWS account or MySQL installation.**
 
+## Read this first
+
+| Your goal | Start here |
+|---|---|
+| Run the project locally in IntelliJ or PowerShell | [01 - Local quickstart](docs/01-LOCAL-QUICKSTART.md) |
+| Know what is actually implemented | [02 - Features & API](docs/02-FEATURES-API.md) |
+| Learn the microservices architecture | [03 - System design](docs/03-ARCHITECTURE.md) |
+| Learn Spring Boot code organization | [04 - Java walkthrough](docs/04-JAVA-CODE-WALKTHROUGH.md) |
+| Understand authentication, RBAC and security | [05 - Security](docs/05-SECURITY.md) |
+| Learn transactions, queues and reliability | [06 - Distributed systems](docs/06-DISTRIBUTED-SYSTEMS.md) |
+| Learn AWS services / what goes where | [07 - AWS service guide](docs/07-AWS-SERVICES.md) |
+| Provision and deploy to AWS | [08 - AWS deployment](docs/08-AWS-DEPLOYMENT.md) |
+| Create Cognito users and test with JWT | [09 - Cognito walkthrough](docs/09-COGNITO-AND-TESTING.md) |
+| Learn AWS-native GitHub CI/CD | [10 - CI/CD guide](docs/10-CICD.md) |
+| Cost estimate, Free Tier rules and cleanup | [11 - AWS costs & cleanup](docs/11-COST-AND-CLEANUP.md) |
+| Learn tests, errors and troubleshooting | [12 - Tests & troubleshooting](docs/12-TESTS-AND-TROUBLESHOOTING.md) |
+| Teach the project to students | [13 - Teaching labs](docs/13-TEACHING-LABS.md) |
+| Senior backend/system design interview | [14 - Interview guide](docs/14-INTERVIEW-GUIDE.md) |
+| Limitations and production upgrades | [15 - Production hardening](docs/15-PRODUCTION-HARDENING.md) |
+| Release / verification notes | [16 - Validation notes](docs/16-VALIDATION-NOTES.md) |
+
 ## Local run: four commands, two terminals
 
 **Prerequisites:** JDK 21, Apache Maven 3.9+, Git. No Docker, MySQL or AWS needed.
